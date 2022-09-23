@@ -16,10 +16,10 @@ public class HighArray implements Array {
     public int find(long searchKey) // Поиск элемента
     {
         int j;
-        for(j=0; j<nElems; j++) // Для каждого элемента
-            if(a[j] == searchKey) // Значение найдено?
+        for (j = 0; j < nElems; j++) // Для каждого элемента
+            if (a[j] == searchKey) // Значение найдено?
                 break; // Да - выход из цикла
-        if(j == nElems) // Достигнут последний элемент?
+        if (j == nElems) // Достигнут последний элемент?
             return -1; // Да
         else
             return j; // Нет
@@ -42,7 +42,7 @@ public class HighArray implements Array {
     }
 
     public void print() {
-        for(int i = 0; i<nElems; i++) {
+        for (int i = 0; i < nElems; i++) {
             System.out.print(a[i] + ' ');
         }
         System.out.println();

@@ -13,7 +13,6 @@ public class HighArrayTest {
         end = System.currentTimeMillis();
         System.out.println("Конец. Время: " + (end - start) + " мс");
 
-
         System.out.println("Начало поиска по массиву случайных элементов...");
         start = System.currentTimeMillis();
         for (int i = 0; i < size; i++) {
@@ -21,7 +20,6 @@ public class HighArrayTest {
         }
         end = System.currentTimeMillis();
         System.out.println("Конец. Время: " + (end - start) + " мс");
-
 
         System.out.println("Начало удаления по массиву случайных элементов...");
         start = System.currentTimeMillis();
