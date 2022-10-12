@@ -5,20 +5,20 @@ public class SortTest {
         boolean condition = true;
         Long start;
         Long end;
-        int size = 10000;
-        HighArray arr = new HighArray(size);
+        int size = 20;
+        SortArray arr = new SortArray(size);
 
         for (int i = 0; i < size; i++) {
             arr.insert((int) (Math.random() * 100));
         }
 
         System.out.print("Список действий:\n" +
-                    "0 - Распечатать исходный массив\n" +
-                    "1 - Сортировка вставками\n" +
-                    "2 - Сортировка выбором\n" +
-                    "3 - Сортировка слиянием\n" +
-                    "4 - Быстрая сортировка\n" +
-                    "5 - Выход");
+                "0 - Распечатать исходный массив\n" +
+                "1 - Сортировка вставками\n" +
+                "2 - Сортировка выбором\n" +
+                "3 - Сортировка слиянием\n" +
+                "4 - Быстрая сортировка\n" +
+                "5 - Выход");
 
         while (condition) {
             System.out.print("\nВыберите действие: ");
@@ -30,9 +30,8 @@ public class SortTest {
                 case 0:
                     arr.print();
                     break;
-                case 1:
-                    // Сортировка вставками
-                    HighArray insSortedArr = arr.clone();
+                case 1: // Сортировка вставками
+                    SortArray insSortedArr = arr.clone();
                     start = System.currentTimeMillis();
                     insSortedArr.selectionSort();
                     end = System.currentTimeMillis();
@@ -42,9 +41,8 @@ public class SortTest {
                     if (in.next().equals("y"))
                         insSortedArr.print();
                     break;
-                case 2:
-                    // Сортировка выбором
-                    HighArray selSortedArr = arr.clone();
+                case 2: // Сортировка выбором
+                    SortArray selSortedArr = arr.clone();
                     start = System.currentTimeMillis();
                     selSortedArr.selectionSort();
                     end = System.currentTimeMillis();
@@ -54,12 +52,19 @@ public class SortTest {
                     if (in.next().equals("y"))
                         selSortedArr.print();
                     break;
-                case 3:
-                    // TODO: Сортировка слиянием
+                case 3: // Сортировка слиянием
+                    SortArray mrgSortedArr = arr.clone();
+                    start = System.currentTimeMillis();
+                    mrgSortedArr.mergeSort();
+                    end = System.currentTimeMillis();
+
+                    System.out.println("Сортировка выбором завершена. Время: " + (end - start) + " мс");
+                    System.out.print("Распечатать результат? (y/n) -> ");
+                    if (in.next().equals("y"))
+                        mrgSortedArr.print();
                     break;
-                case 4:
-                    // Быстрая сортировка
-                    HighArray qckSortedArr = arr.clone();
+                case 4: // Быстрая сортировка
+                    SortArray qckSortedArr = arr.clone();
                     start = System.currentTimeMillis();
                     qckSortedArr.quickSort();
                     end = System.currentTimeMillis();
