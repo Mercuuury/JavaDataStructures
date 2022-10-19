@@ -43,7 +43,7 @@ public class HighArray implements Array {
 
     public void print() {
         for (int i = 0; i < nElems; i++) {
-            System.out.print(a[i] + ' ');
+            System.out.print(a[i] + " ");
         }
         System.out.println();
     }
