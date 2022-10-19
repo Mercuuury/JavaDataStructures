@@ -32,9 +32,9 @@ public class SortTest {
                     break;
                 case 1: // Сортировка вставками
                     SortArray insSortedArr = arr.clone();
-                    start = System.currentTimeMillis();
+                    start = System.nanoTime();
                     insSortedArr.selectionSort();
-                    end = System.currentTimeMillis();
+                    end = System.nanoTime();
 
                     System.out.println("Сортировка вставками завершена. Время: " + (end - start) + " мс");
                     System.out.print("Распечатать результат? (y/n) -> ");
@@ -43,9 +43,9 @@ public class SortTest {
                     break;
                 case 2: // Сортировка выбором
                     SortArray selSortedArr = arr.clone();
-                    start = System.currentTimeMillis();
+                    start = System.nanoTime();
                     selSortedArr.selectionSort();
-                    end = System.currentTimeMillis();
+                    end = System.nanoTime();
 
                     System.out.println("Сортировка выбором завершена. Время: " + (end - start) + " мс");
                     System.out.print("Распечатать результат? (y/n) -> ");
@@ -54,9 +54,9 @@ public class SortTest {
                     break;
                 case 3: // Сортировка слиянием
                     SortArray mrgSortedArr = arr.clone();
-                    start = System.currentTimeMillis();
+                    start = System.nanoTime();
                     mrgSortedArr.mergeSort();
-                    end = System.currentTimeMillis();
+                    end = System.nanoTime();
 
                     System.out.println("Сортировка выбором завершена. Время: " + (end - start) + " мс");
                     System.out.print("Распечатать результат? (y/n) -> ");
@@ -65,9 +65,9 @@ public class SortTest {
                     break;
                 case 4: // Быстрая сортировка
                     SortArray qckSortedArr = arr.clone();
-                    start = System.currentTimeMillis();
+                    start = System.nanoTime();
                     qckSortedArr.quickSort();
-                    end = System.currentTimeMillis();
+                    end = System.nanoTime();
 
                     System.out.println("Быстрая сортировка завершена. Время: " + (end - start) + " мс");
                     System.out.print("Распечатать результат? (y/n) -> ");
