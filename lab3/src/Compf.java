@@ -1,13 +1,11 @@
 //Стековый компилятор формул.
 public class Compf extends Stack {
-    // 2+3*5
-    //
     // Типы символов (скобки, знаки операций, иное).
     protected final static int SYM_LEFT = 0,
             SYM_RIGHT = 1,
             SYM_OPER = 2,
             SYM_OTHER = 3;
-    protected boolean isOper = false;
+    protected boolean isOper, isUnar, isAfterBracket = false;
 
     private int symType(char c) throws Exception {
         switch (c) {
@@ -19,7 +17,7 @@ public class Compf extends Stack {
             case '-':
             case '*':
             case '/':
-            case '^': // оператор возведения в степень
+            case '^':
                 return SYM_OPER;
             default:
                 return symOther(c);
@@ -36,12 +34,16 @@ public class Compf extends Stack {
                 nextOther(c); // переходим в nextOther() со значением isOper = true;
                 processSuspendedSymbols(c);
                 pop();
+                isAfterBracket = true;
                 break;
             case SYM_OPER:
                 isOper = true; // убедимся, что в стеке есть числа в случае необходимости их обработать
                 nextOther(c); // переходим в nextOther() со значением isOper = true;
-                processSuspendedSymbols(c);
-                push(c);
+                if (!isUnar) {
+                    processSuspendedSymbols(c);
+                    push(c);
+                }
+                isUnar = false;
                 break;
             case SYM_OTHER:
                 nextOther(c);
@@ -55,7 +57,6 @@ public class Compf extends Stack {
     }
 
     private int priority(char c) {
-        // return c == '+' || c == '-' ? 1 : 2;
         if (c == '+' || c == '-')
             return 1;
         else if (c == '*' || c == '/')
@@ -76,9 +77,8 @@ public class Compf extends Stack {
     }
 
     protected int symOther(char c) throws Exception {
-        if (c < 'a' || c > 'z') {
+        if ((c < '0' || c > '9') && (c != '.' || c != 'p' || c != 'e')) {
             System.out.println("Недопустимый символ: " + c);
-            // System.exit(0);
             throw new Exception("Недопустимый символ: " + c);
         }
 
@@ -93,12 +93,10 @@ public class Compf extends Stack {
         nextOper(c);
     }
 
-    public int compile(char[] str) throws Exception {
+    public double compile(char[] str) throws Exception {
         processSymbol('(');
-
         for (int i = 0; i < str.length; i++)
             processSymbol(str[i]);
-
         processSymbol(')');
 
         System.out.print("\n");

@@ -1,17 +1,12 @@
 //Калькулятор арифметических формул.
 public class Calc extends Compf {
-    private StackInt s;
+    private StackDouble s;
     private static String OUTPUT = "";
-
-    // private static int char2int(char c){
-    // return (int)c - (int)'0';
-    // }
 
     @Override
     protected int symOther(char c) throws Exception {
-        if (c < '0' || c > '9') {
+        if ((c < '0' || c > '9') && c != '.' && c != 'p' && c != 'e') {
             System.out.println("Недопустимый символ: " + c);
-            // System.exit(0);
             throw new Exception("Недопустимый символ: " + c);
         }
 
@@ -20,8 +15,8 @@ public class Calc extends Compf {
 
     @Override
     protected void nextOper(char c) {
-        int second = s.pop();
-        int first = s.pop();
+        double second = s.pop();
+        double first = s.pop();
 
         switch (c) {
             case '+':
@@ -48,26 +43,41 @@ public class Calc extends Compf {
     @Override
     protected void nextOther(char c) {
         if (!isOper) { // если мы попали сюда из SYM_OTHER
-            OUTPUT += c; // значит у нас обрабатывается цифра, записываем её.
+            if (c == 'p')
+                OUTPUT += Double.toString(Math.PI);
+            else if (c == 'e')
+                OUTPUT += Double.toString(Math.E);
+            else
+                OUTPUT += c; // значит у нас обрабатывается цифра, записываем её.
         } else { // иначе (если попали из case SYM_RIGHT || case SYM_OPER)
             if (OUTPUT.length() != 0) { // если есть отложеное число
-                s.push(Integer.parseInt(OUTPUT)); // вносим в числовой стек
+                s.push(Double.parseDouble(OUTPUT)); // вносим в числовой стек
                 OUTPUT = ""; // очищаем строку чисел
+            } else {
+                if (c != ')') {
+                    if (isAfterBracket) {
+                        isUnar = false;
+                        isAfterBracket = false;
+                    } else {
+                        OUTPUT += c;
+                        isUnar = true;
+                    }
+                }
             }
             isOper = false; // изменяем переменную, чтобы начать обрабатывать оператор/скобку и после
                             // добавлять новые числа
         }
-        // s.push(char2int(c));
-        // s.push(Character.getNumericValue(c));
     }
 
     public Calc() {
-        s = new StackInt();
+        s = new StackDouble();
     }
 
-    public final int compile(char[] str) throws Exception {
+    public final double compile(char[] str) throws Exception {
         super.compile(str);
-
+        isOper = false;
+        isUnar = false;
+        isAfterBracket = false;
         System.out.println("" + s.top());
         return s.top();
     }

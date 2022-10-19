@@ -1,23 +1,23 @@
 //Непрерывная реализация стека целых чисел.
-class StackInt {
+class StackDouble {
     private static final int DEFSIZE = 16;
-    private int[] array;
+    private double[] array;
     private int head;
 
-    public StackInt() {
-        array = new int[DEFSIZE];
+    public StackDouble() {
+        array = new double[DEFSIZE];
         head = 0;
     }
 
-    public final void push(int val) {
+    public final void push(double val) {
         array[head++] = val;
     }
 
-    public final int pop() {
+    public final double pop() {
         return array[--head];
     }
 
-    public final int top() {
+    public final double top() {
         return array[head - 1];
     }
 }
