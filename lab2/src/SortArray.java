@@ -89,7 +89,7 @@ public class SortArray implements Cloneable {
         int i = 0, j = 0, k = 0;
         int leftSize = leftHalf.length;
         int rightSize = rightHalf.length;
-        while (i < leftSize && j < rightSize) { // Проходим по обеим подмассивам
+        while (i < leftSize && j < rightSize) { // Проходим по обоим подмассивам
             if (leftHalf[i] <= rightHalf[j]) { // Взвешиваем элементы обоих массивов и записываем меньший
                 inputArray[k] = leftHalf[i];
                 i++;

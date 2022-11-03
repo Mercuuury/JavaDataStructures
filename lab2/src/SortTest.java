@@ -5,7 +5,7 @@ public class SortTest {
         boolean condition = true;
         Long start;
         Long end;
-        int size = 20;
+        int size = 20000;
         SortArray arr = new SortArray(size);
 
         for (int i = 0; i < size; i++) {
@@ -58,7 +58,7 @@ public class SortTest {
                     mrgSortedArr.mergeSort();
                     end = System.nanoTime();
 
-                    System.out.println("Сортировка выбором завершена. Время: " + (end - start) + " мс");
+                    System.out.println("Сортировка слиянием завершена. Время: " + (end - start) + " мс");
                     System.out.print("Распечатать результат? (y/n) -> ");
                     if (in.next().equals("y"))
                         mrgSortedArr.print();

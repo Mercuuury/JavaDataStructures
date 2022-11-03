@@ -1,4 +1,4 @@
-//Непрерывная реализация стека целых чисел.
+//Непрерывная реализация стека чисел.
 class StackDouble {
     private static final int DEFSIZE = 16;
     private double[] array;
