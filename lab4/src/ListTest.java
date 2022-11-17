@@ -4,7 +4,7 @@ public class ListTest {
     public static void main(String[] args) {
         Long start;
         Long end;
-        long[] arr = LongStream.range(0, 11).toArray();
+        long[] arr = LongStream.range(0, 30).toArray();
         ListArray larr = new ListArray(arr);
         LinkedList l1list = new LinkedList(arr);
         DoubleEndedList delist = new DoubleEndedList(arr);
@@ -46,6 +46,10 @@ public class ListTest {
         l2Iter.reset();
         deIter.reset();
         System.out.println(">>> Проверка скорости перехода к следующему элементу...");
+        start = System.nanoTime();
+        moved = l1Iter.nextLink();
+        end = System.nanoTime();
+        System.out.println("в односвязном списке: " + (end - start) + " нс. Успех: " + moved);
         start = System.nanoTime();
         moved = l1Iter.nextLink();
         end = System.nanoTime();

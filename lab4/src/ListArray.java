@@ -1,4 +1,4 @@
-public class ListArray implements Array {
+public class ListArray {
     private long[] a; // Ссылка на массив a
     private int nElems; // Количество элементов
 
