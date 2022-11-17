@@ -7,6 +7,13 @@ public class DoubleEndedList implements List{
         _last = null;
     }
 
+    public DoubleEndedList(long[] arr) {
+        _first = null;
+        _last = null;
+        for (long i : arr)
+            this.insertLast(i);
+    }
+
     public Link find(long val) // Поиск элемента с заданным значением
     {
         Link cur = _first;
@@ -66,7 +73,7 @@ public class DoubleEndedList implements List{
     }
 
     public void displayList() {
-        System.out.print("List: ");
+        System.out.print("DoublyEndedList: ");
         Link cur = _first;
         while (cur != null) {
             cur.displayLink();
@@ -78,6 +85,10 @@ public class DoubleEndedList implements List{
     public Link getFirst() {
         return _first;
     }
+    
+    public Link getLast() {
+        return _last;
+    }
 
     public void setFirst(Link f) {
         _first = f;
@@ -85,5 +96,45 @@ public class DoubleEndedList implements List{
 
     public ListIterator getIterator() {
         return new ListIterator(this); // Инициализация списком this
+    }
+
+    public void swap(long x, long y) {
+        if (x == y)
+            return;
+        
+        Link prevX = null, currX = _first;
+        while (currX != null && currX.value != x) {
+            prevX = currX;
+            currX = currX.next;
+        }
+
+        Link prevY = null, currY = _first;
+        while (currY != null && currY.value != y) {
+            prevY = currY;
+            currY = currY.next;
+        }
+
+        if (currX == null || currY == null)
+            return;
+        
+        if (prevX != null) // Если x не первый
+            prevX.next = currY;
+        else
+            _first = currY;
+
+        if (prevY != null) // Если y не первый
+            prevY.next = currX;
+        else
+            _first = currX;
+
+        Link temp = currX.next;
+        currX.next = currY.next;
+        currY.next = temp;
+
+        if (currX.next == null) // Если x последний
+            _last = currY;
+
+        if (currX.next == null) // Если y последний
+            _last = currX;
     }
 }

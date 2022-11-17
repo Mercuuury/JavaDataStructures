@@ -7,6 +7,13 @@ public class DoublyLinkedList implements List {
         _last = null;
     }
 
+    public DoublyLinkedList(long[] arr) {
+        _first = null;
+        _last = null;
+        for (long i : arr)
+            this.insertLast(i);
+    }
+
     public Link find(long val) // Поиск элемента по значению
     {
         Link cur = _first;
@@ -161,7 +168,7 @@ public class DoublyLinkedList implements List {
     }
 
     public void displayForward() {
-        System.out.print("List (first-->last): ");
+        System.out.print("DoublyLinkedList (first-->last): ");
         Link cur = _first;
         while (cur != null) {
             cur.displayLink();
@@ -171,7 +178,7 @@ public class DoublyLinkedList implements List {
     }
 
     public void displayBackward() {
-        System.out.print("List (last-->first): ");
+        System.out.print("DoublyLinkedList (last-->first): ");
         Link cur = _last;
         while (cur != null) {
             cur.displayLink();
@@ -183,12 +190,52 @@ public class DoublyLinkedList implements List {
     public Link getFirst() {
         return _first;
     }
-
+    
+    public Link getLast() {
+        return _last;
+    }
+    
     public void setFirst(Link f) {
         _first = f;
     }
 
     public ListIterator getIterator() {
         return new ListIterator(this); // Инициализация списком this
+    }
+
+    public void swap(long x, long y) {
+        if (isEmpty() || x == y)
+            return;
+
+        Link Link1 = find(x);
+        Link Link2 = find(y);
+
+        if (Link1 == _first)
+            _first = Link2;
+        else if (Link2 == _first)
+            _first = Link1;
+        if (Link1 == _last)
+            _last = Link2;
+        else if (Link2 == _last)
+            _last = Link1;
+
+        Link temp;
+        temp = Link1.next;
+        Link1.next = Link2.next;
+        Link2.next = temp;
+
+        if (Link1.next != null)
+            Link1.next.prev = Link1;
+        if (Link2.next != null)
+            Link2.next.prev = Link2;
+
+        temp = Link1.prev;
+        Link1.prev = Link2.prev;
+        Link2.prev = temp;
+
+        if (Link1.prev != null)
+            Link1.prev.next = Link1;
+        if (Link2.prev != null)
+            Link2.prev.next = Link2;
     }
 }

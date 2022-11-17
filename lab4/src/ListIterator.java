@@ -9,25 +9,30 @@ public class ListIterator {
         reset();
     }
 
-    public void reset() // start at ‘first’
+    public void reset() // Начать с first
     {
         _current = _ourList.getFirst();
         _previous = null;
     }
 
-    public boolean atStart() // true if first link
-    {
+    public boolean atStart() {
         return (_current.prev == null);
     }
 
-    public boolean atEnd() // true if last link
-    {
+    public boolean atEnd() {
         return (_current.next == null);
     }
 
-    public boolean nextLink() // go to next link
-    {
-        if(!atEnd()) {
+    public void moveAtStart() {
+        _current = _ourList.getFirst();
+    }
+
+    public void moveAtEnd() {
+        _current = _ourList.getLast();
+    }
+
+    public boolean nextLink() {
+        if (!atEnd()) {
             _previous = _current;
             _current = _current.next;
             return true;
@@ -35,9 +40,8 @@ public class ListIterator {
         return false;
     }
 
-    public boolean prevLink() // go to prev link
-    {
-        if(!atStart()) {
+    public boolean prevLink() {
+        if (!atStart()) {
             _following = _current;
             _current = _current.prev;
             return true;
@@ -45,52 +49,42 @@ public class ListIterator {
         return false;
     }
 
-    public Link getCurrent() // get current link
-    {
+    public Link getCurrent() {
         return _current;
     }
 
-    public void insertAfter(long dd) // insert after
-    { // current link
+    public void insertAfter(long dd) {
         Link newLink = new Link(dd);
-        if (_ourList.isEmpty()) // empty list
-        {
+        if (_ourList.isEmpty()) {
             _ourList.setFirst(newLink);
             _current = newLink;
 
-        } else // not empty
-        {
+        } else {
             newLink.next = _current.next;
             _current.next = newLink;
-            nextLink(); // point to new link
+            nextLink();
         }
     }
 
-    public void insertBefore(long dd) // insert before
-    { // current link
+    public void insertBefore(long dd) {
         Link newLink = new Link(dd);
-        if (_previous == null) // beginning of list
-        { // (or empty list)
+        if (_previous == null) { // Если в начале или список пуст
             newLink.next = _ourList.getFirst();
             _ourList.setFirst(newLink);
             reset();
-        } else // not beginning
-        {
+        } else {
             newLink.next = _previous.next;
             _previous.next = newLink;
             _current = newLink;
         }
     }
 
-    public long deleteCurrent() // delete item at current
-    {
+    public long deleteCurrent() {
         long value = _current.value;
-        if (_previous == null) // beginning of list
-        {
+        if (_previous == null) { // Если в начале
             _ourList.setFirst(_current.next);
             reset();
-        } else // not beginning
-        {
+        } else {
             _previous.next = _current.next;
             if (atEnd())
                 reset();

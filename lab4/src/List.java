@@ -1,9 +1,11 @@
 public interface List {
+    ListIterator getIterator();
+
     Link getFirst();
 
-    void setFirst(Link f);
+    Link getLast();
 
-    ListIterator getIterator();
+    void setFirst(Link f);
 
     boolean isEmpty();
 }

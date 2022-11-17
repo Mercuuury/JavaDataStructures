@@ -5,6 +5,13 @@ public class SortedList implements List{
         _first = null;
     }
     
+    public SortedList(long[] arr) {
+        _first = null;
+        for (long i : arr) {
+            this.insert(i);
+        } 
+    }
+
     public Link find(long val) // Поиск элемента с заданным значением
     {
         Link cur = _first;
@@ -64,7 +71,7 @@ public class SortedList implements List{
     }
 
     public void displayList() {
-        System.out.print("List: ");
+        System.out.print("SortedList: ");
         Link current = _first;
         while (current != null) {
             current.displayLink();
@@ -77,11 +84,52 @@ public class SortedList implements List{
         return _first;
     }
 
+    public Link getLast() {
+        Link cur = _first;
+        while (cur.next != null)
+            cur = cur.next;
+        return cur;
+    }
+
     public void setFirst(Link f) {
         _first = f;
     }
 
     public ListIterator getIterator() {
         return new ListIterator(this); // Инициализация списком this
+    }
+
+    public void swap(long x, long y) {
+        if (x == y)
+            return;
+        
+        Link prevX = null, currX = _first;
+        while (currX != null && currX.value != x) {
+            prevX = currX;
+            currX = currX.next;
+        }
+
+        Link prevY = null, currY = _first;
+        while (currY != null && currY.value != y) {
+            prevY = currY;
+            currY = currY.next;
+        }
+
+        if (currX == null || currY == null)
+            return;
+        
+        if (prevX != null) // Если x не первый
+            prevX.next = currY;
+        else
+            _first = currY;
+
+        if (prevY != null) // Если y не первый
+            prevY.next = currX;
+        else
+            _first = currX;
+
+        Link temp = currX.next;
+        currX.next = currY.next;
+        currY.next = temp;
     }
 }
