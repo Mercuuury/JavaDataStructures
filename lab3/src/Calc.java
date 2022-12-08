@@ -32,10 +32,7 @@ public class Calc extends Compf {
                 s.push(first / second);
                 break;
             case '^':
-                int result = 1;
-                for (int i = 1; i <= second; i++)
-                    result *= first;
-                s.push(result);
+                s.push(Math.pow(first, second));
                 break;
         }
     }
