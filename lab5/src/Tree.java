@@ -22,7 +22,7 @@ public class Tree {
         return current;
     }
 
-    public void insert(int value) {
+    public void add(int value) {
         TreeNode newNode = new TreeNode(value);
         if (root == null) // Если у дерева нет корня
             root = newNode;
@@ -47,7 +47,7 @@ public class Tree {
         }
     }
 
-    public boolean delete(int key) {
+    public boolean remove(int key) {
         if (root == null)
             return false;
         TreeNode current = root;
